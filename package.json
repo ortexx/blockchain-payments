@@ -1,0 +1,30 @@
+{
+  "name": "blockchain-payments",
+  "version": "0.0.1",
+  "description": "Blockchain.info payment api module",
+  "main": "./index.js",
+  "author": {
+    "name": "Balasyan Alexandr",
+    "email": "mywebstreet@gmail.com"
+  },
+  "keywords": [
+    "blockchain",
+    "blockchain.info",
+    "btc",
+    "bitcoin",
+    "api"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1",
+    "lodash": "^4.16.4"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/ortexx/blockchain-payments"
+  },
+  "engines": {
+    "node": ">=5.0.0"
+  }
+}
