@@ -6,6 +6,24 @@ const qs = require('querystring');
 const url = require('url');
 
 class BlockchainPayments {
+  static request(options) {
+    return request(options);
+  }
+
+  static toBTC(value, currency) {
+    currency = currency || 'USD';
+    currency = currency.toUpperCase();
+
+    let options = {};
+
+    options.method = 'GET';
+    options.url = `https://blockchain.info/tobtc?currency=${currency}&value=${value}`;
+
+    return this.request(options).then((_value) => {
+      return parseFloat(_value);
+    });
+  }
+
   constructor(xpub, key, notifySecret, notifyUrl) {
     this.defaults = {
       xpub: xpub,
@@ -33,17 +51,28 @@ class BlockchainPayments {
     return query;
   }
 
+  queryCheck(query) {
+    if(!query.xpub) {
+      throw new Error('xpub is required');
+    }
+    else if(!query.key) {
+      throw new Error('key is required');
+    }
+    else if(!query.callback) {
+      throw new Error('callback is required');
+    }
+  }
+
   request(options) {
     options = _.extend({}, this.queryDefaultOptions, options);
-    console.log('Blockchain request: ' + options.url);
 
-    return request(options).then((data) => {
+    return this.constructor.request(options).then((data) => {
       if(typeof data != 'object') {
-        data = JSON.parse(data);;
+        data = JSON.parse(data);
       }
 
       return data
-    })
+    });
   }
 
   createRequestOptions(url, params) {
@@ -74,6 +103,8 @@ class BlockchainPayments {
       })
     }
 
+    this.queryCheck(query);
+
     return this.request(this.createRequestOptions(this.getAddressCreateUrl(), query));
   }
 
@@ -84,7 +115,7 @@ class BlockchainPayments {
       let ok = () => {
         res.set('Content-Type', 'text/plain');
         return res.send('*ok*');
-      }
+      };
 
       let fail = (err, meta) => {
         res.set('Content-Type', 'text/plain');
@@ -95,7 +126,7 @@ class BlockchainPayments {
         }
 
         return res.send('*bad*');
-      }
+      };
 
       if(~~req.query.confirmations < confirmationsCount) {
         return fail(new Error('Confirmations count less than ' + confirmationsCount), {
@@ -104,7 +135,7 @@ class BlockchainPayments {
         });
       }
 
-      if(req.query.secret != this.notifySecret) {
+      if(this.notifySecret && req.query.secret != this.notifySecret) {
         return fail(new Error('Wrong secret key'), {
           reason: 'secret'
         });
@@ -132,20 +163,6 @@ class BlockchainPayments {
         })
       }
     }
-  }
-
-  static toBTC(value, currency) {
-    currency = currency || 'USD';
-    currency = currency.toUpperCase();
-
-    let options = {};
-
-    options.method = 'GET';
-    options.url = `https://blockchain.info/tobtc?currency=${currency}&value=${value}`;
-
-    return request(options).then((_value) => {
-      return parseFloat(_value);
-    });
   }
 }
 

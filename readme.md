@@ -2,7 +2,7 @@
 `npm install blockchain-payments`
 
 # About
-Blockchain.info payment api module
+Blockchain.info payment api (v2) module
 
 # Example
 ```js
@@ -34,7 +34,7 @@ BlockchainPayments.toBTC(500, 'USD').then((amountInBTC) => {
 
 // notify handler
 let successHandler = (data, callback) => {
-    // data == req.query    
+    // data === req.query    
     // save payment info in db e.t.c    
     // callback() or return promise
 };
@@ -50,19 +50,20 @@ app.post('payments/notify/handler/', blockchain.notify(successHandler, errorHand
 
 ```
 
-# Description
+# Description  
 You can write custom notify handler, but library version includes data/authentication validation and automatically send all headers in necessary format
 
 # API
-### .constructor(xpub, key, notifySecret, callback)
+### .constructor(xpub, key, notifySecret, [notifyCallback])  
 xpub and key you can find in your blockchain account, notifySecret you must come up yourself
 
-### .createAddress(query, callbackQuery)
-returns promise, create bitcoin address for client payment
+### .createAddress(query, [callbackQuery])
+returns promise, create bitcoin address for client payment  
+you can set callback url query params with callbackQuery, it must be object
 
-### .notify(fn, onError, checkSignature)
+### .notify(fn, onError, [confirmationsCount])
 notify handler, it is "connect" middleware
 
 # Class methods
 ### .toBTC(amount, currency)
-converting amount in currency to BTC, return promise
+converting amount in the currency to BTC, returns promise

@@ -1,6 +1,6 @@
 {
   "name": "blockchain-payments",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Blockchain.info payment api module",
   "main": "./index.js",
   "author": {
@@ -15,10 +15,19 @@
     "api"
   ],
   "license": "MIT",
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
     "request": "^2.75.0",
     "request-promise": "^4.1.1",
     "lodash": "^4.16.4"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "chai": "^3.5.0",
+    "express": "^4.14.1",
+    "supertest": "^2.0.1"
   },
   "repository" : {
     "type" : "git",
