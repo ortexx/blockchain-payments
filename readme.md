@@ -46,7 +46,7 @@ let errorHandler = (err, meta) => {
 
 let confirmationsCount = 8; // count of confirmations for accept, default 6
 
-app.post('payments/notify/handler/', blockchain.notify(successHandler, errorHandler, confirmationsCount));
+app.get('payments/notify/handler/', blockchain.notify(successHandler, errorHandler, confirmationsCount));
 
 ```
 
