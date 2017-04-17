@@ -10,9 +10,9 @@ const BlockchainPayments = require("blockchain-payments");
 const express = require("express");
 const app = express();
 
-let xpub = "xpubxpubxpub"; // xpub
-let key = "keykeykey"; // blockchain key
-let notifySecret = "secretsecret"; // secret key for notification
+let xpub = "xpub"; // xpub
+let key = "key"; // blockchain key
+let notifySecret = "secret"; // secret key for notification
 
 const blockchain = new BlockchainPayments(xpub, key, notifySecret);
 
@@ -32,7 +32,7 @@ BlockchainPayments.toBTC(500, 'USD').then((amountInBTC) => {
     // converting USD(or other) to BTC;
 });
 
-// notify handler
+// notification handler
 let successHandler = (data, callback) => {
     // data === req.query    
     // save payment info in db e.t.c    
@@ -40,30 +40,30 @@ let successHandler = (data, callback) => {
 };
 
 let errorHandler = (err, meta) => {
-    // you can save to a file, db e.t.c.
+    // you can save something to a file, db e.t.c.
     // operation must be synchronous or in the background
 };
 
-let confirmationsCount = 8; // count of confirmations for accept, default 6
+let confirmationsCount = 8; // count of confirmations for acception, default is 6
 
-app.get('payments/notify/handler/', blockchain.notify(successHandler, errorHandler, confirmationsCount));
+app.get('payments/notification/', blockchain.notify(successHandler, errorHandler, confirmationsCount));
 
 ```
 
 # Description  
-You can write custom notify handler, but library version includes data/authentication validation and automatically send all headers in necessary format
+You can write custom notification handler, but library version includes data/authentication validation and automatically sends all headers in the necessary format
 
 # API
 ### .constructor(xpub, key, notifySecret, [notifyCallback])  
-xpub and key you can find in your blockchain account, notifySecret you must come up yourself
+you can find "xpub" and "key" in your blockchain account, notifySecret you have to come up yourself
 
 ### .createAddress(query, [callbackQuery])
-returns promise, create bitcoin address for client payment  
-you can set callback url query params with callbackQuery, it must be object
+returns promise, creates bitcoin address for client payment  
+you can set callback url query params with callbackQuery as js object
 
 ### .notify(fn, onError, [confirmationsCount])
-notify handler, it is "connect" middleware
+notification handler, it is "connect" middleware
 
 # Class methods
 ### .toBTC(amount, currency)
-converting amount in the currency to BTC, returns promise
+converts an amount from a given currency to BTC, returns promise
