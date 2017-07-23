@@ -5,6 +5,8 @@
 Blockchain.info payment api (v2) module
 
 # Example
+## Creation of an address
+
 ```js
 const BlockchainPayments = require("blockchain-payments");
 const express = require("express");
@@ -27,12 +29,19 @@ app.post('/payments/bitcoin/address/', (req, res, next) => {
         console.log(data) // {address: ..., index: ..., callback: ...}
     })
 });
+```
 
+## Conversation of currencies
+
+```js
 BlockchainPayments.toBTC(500, 'USD').then((amountInBTC) => {
     // converting USD(or other) to BTC;
 });
+```
 
-// notification handler
+## Handling of a notification
+
+```js
 let successHandler = (data, callback) => {
     // data === req.query    
     // save payment info in db e.t.c    
