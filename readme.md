@@ -64,7 +64,7 @@ You can write custom notification handler, but library version includes data/aut
 
 # API
 ### .constructor(xpub, key, notifySecret, [notifyCallback])  
-you can find "xpub" and "key" in your blockchain account, notifySecret you have to come up yourself
+you can find __xpub__ and __key__ in your blockchain account, notifySecret you have to come up yourself
 
 ### .createAddress(query, [callbackQuery])
 returns promise, creates bitcoin address for client payment  
