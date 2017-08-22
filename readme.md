@@ -12,9 +12,9 @@ const BlockchainPayments = require("blockchain-payments");
 const express = require("express");
 const app = express();
 
-let xpub = "xpub"; // xpub
-let key = "key"; // blockchain key
-let notifySecret = "secret"; // secret key for notification
+const xpub = "xpub"; // xpub
+const key = "key"; // blockchain key
+const notifySecret = "secret"; // secret key for notification
 
 const blockchain = new BlockchainPayments(xpub, key, notifySecret);
 
@@ -42,13 +42,13 @@ BlockchainPayments.toBTC(500, 'USD').then((amountInBTC) => {
 ## Handling of a notification
 
 ```js
-let successHandler = (data, callback) => {
+const successHandler = (data, callback) => {
     // data === req.query    
     // save payment info in db e.t.c    
     // callback() or return promise
 };
 
-let errorHandler = (err, meta) => {
+const errorHandler = (err, meta) => {
     // you can save something to a file, db e.t.c.
     // operation must be synchronous or in the background
 };
