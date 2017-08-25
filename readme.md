@@ -44,7 +44,7 @@ BlockchainPayments.toBTC(500, 'USD').then((amountInBTC) => {
 ```js
 const successHandler = (data, callback) => {
     // data === req.query    
-    // save payment info in db e.t.c    
+    // save payment info into db e.t.c    
     // callback() or return promise
 };
 
