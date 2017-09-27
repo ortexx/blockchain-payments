@@ -71,7 +71,7 @@ class BlockchainPayments {
         data = JSON.parse(data);
       }
 
-      return data
+      return data;
     });
   }
 
