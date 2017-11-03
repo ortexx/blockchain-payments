@@ -18,7 +18,7 @@ const notifySecret = "secret"; // secret key for notification
 
 const blockchain = new BlockchainPayments(xpub, key, notifySecret);
 
-// Create address for payment
+// Create an address for the payment
 app.post('/payments/bitcoin/address/', (req, res, next) => {    
     blockchain.createAddress({
         callback: 'http://example.com'
