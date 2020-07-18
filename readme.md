@@ -20,14 +20,14 @@ const blockchain = new BlockchainPayments(xpub, key, notifySecret);
 
 // Create an address for the payment
 app.post('/payments/bitcoin/address/', (req, res, next) => {    
-    blockchain.createAddress({
-        callback: 'http://example.com'
-    }, {
+  blockchain.createAddress({
+      callback: 'http://example.com'
+  }, {
       someCallbackField1: '1',
       someCallbackFieldw2: '2',
-    }).then((data) => {
-        console.log(data) // {address: ..., index: ..., callback: ...}
-    })
+  }).then((data) => {
+      console.log(data) // {address: ..., index: ..., callback: ...}
+  })
 });
 ```
 
@@ -43,17 +43,17 @@ BlockchainPayments.toBTC(500, 'USD').then((amountInBTC) => {
 
 ```js
 const successHandler = (data, callback) => {
-    // data === req.query    
-    // save payment info into db e.t.c    
-    // callback() or return promise
+  // data === req.query    
+  // save payment info into db e.t.c    
+  // callback() or return promise
 };
 
 const errorHandler = (err, meta) => {
-    // you can save something to a file, db e.t.c.
-    // operation must be synchronous or in the background
+  // you can save something to a file, db e.t.c.
+  // operation must be synchronous or in the background
 };
 
-let confirmationsCount = 8; // count of confirmations for acception, default is 6
+let confirmationsCount = 8; // count of confirmations for acception, default 6
 
 app.get('payments/notification/', blockchain.notify(successHandler, errorHandler, confirmationsCount));
 ```
@@ -63,7 +63,7 @@ You can write custom notification handler, but library version includes data/aut
 
 # API
 ### .constructor(xpub, key, notifySecret, [notifyCallback])  
-you can find __xpub__ and __key__ in your blockchain account, notifySecret you have to come up yourself
+you can find __xpub__ and __key__ in your blockchain account, __notifySecret__ you have to come up yourself
 
 ### .createAddress(query, [callbackQuery])
 returns promise, creates bitcoin address for client payment  
