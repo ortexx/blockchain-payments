@@ -1,10 +1,10 @@
 {
   "name": "blockchain-payments",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "Blockchain.info payment api module",
   "main": "./index.js",
   "author": {
-    "name": "Balasyan Alexandr",
+    "name": "Alexander Balasyan",
     "email": "mywebstreet@gmail.com"
   },
   "keywords": [
@@ -19,9 +19,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "request": "^2.75.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.2.6"
   },
   "devDependencies": {
     "chai": "^3.5.0",
