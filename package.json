@@ -1,6 +1,6 @@
 {
   "name": "blockchain-payments",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Blockchain.info payment api module",
   "main": "./index.js",
   "author": {
